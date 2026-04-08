@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -35,6 +38,43 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _incrementCounterByTwo() {
+    setState(() {
+      _counter = _counter + 2;
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
+    });
+  }
+
+  void _decrementCounterByTwo() {
+    setState(() {
+      _counter = _counter - 2;
+    });
+  }
+
+  void _squareCounter() {
+    setState(() {
+      _counter = _counter * _counter;
+    });
+  }
+
+  void _randomizeCounter() {
+    setState(() {
+      bool rnd = Random().nextBool();
+      int factor = Random().nextInt(10) + 1;
+      _counter = _counter + factor;
+      if (rnd) {
+        _counter = _counter * factor;
+      } else {
+        _counter = (_counter / factor).floor();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,22 +82,43 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: .center,
-          children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+      body: Column(
+        mainAxisAlignment: .spaceBetween,
+        children: [
+          const Text('You have pushed the button this many times:'),
+          Text('$_counter', style: Theme.of(context).textTheme.headlineMedium),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: .spaceAround,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: _incrementCounter,
+                  label: Icon(Icons.exposure_plus_1),
+                ),
+                ElevatedButton.icon(
+                  onPressed: _incrementCounterByTwo,
+                  label: Icon(Icons.exposure_plus_2),
+                ),
+                ElevatedButton.icon(
+                  onPressed: _decrementCounter,
+                  label: Icon(Icons.exposure_minus_1),
+                ),
+                ElevatedButton.icon(
+                  onPressed: _decrementCounterByTwo,
+                  label: Icon(Icons.exposure_minus_2),
+                ),
+                ElevatedButton.icon(
+                  onPressed: _squareCounter,
+                  label: Icon(Icons.superscript),
+                ),
+                ElevatedButton.icon(
+                  onPressed: _randomizeCounter,
+                  label: Icon(Icons.question_mark),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+          ),
+        ],
       ),
     );
   }
