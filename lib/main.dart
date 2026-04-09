@@ -85,38 +85,50 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         mainAxisAlignment: .spaceBetween,
         children: [
-          const Text('You have pushed the button this many times:'),
-          Text('$_counter', style: Theme.of(context).textTheme.headlineMedium),
           Expanded(
-            child: Row(
-              mainAxisAlignment: .spaceAround,
-              children: [
-                ElevatedButton.icon(
-                  onPressed: _incrementCounter,
-                  label: Icon(Icons.exposure_plus_1),
-                ),
-                ElevatedButton.icon(
-                  onPressed: _incrementCounterByTwo,
-                  label: Icon(Icons.exposure_plus_2),
-                ),
-                ElevatedButton.icon(
-                  onPressed: _decrementCounter,
-                  label: Icon(Icons.exposure_minus_1),
-                ),
-                ElevatedButton.icon(
-                  onPressed: _decrementCounterByTwo,
-                  label: Icon(Icons.exposure_minus_2),
-                ),
-                ElevatedButton.icon(
-                  onPressed: _squareCounter,
-                  label: Icon(Icons.superscript),
-                ),
-                ElevatedButton.icon(
-                  onPressed: _randomizeCounter,
-                  label: Icon(Icons.question_mark),
-                ),
-              ],
+            child: Center(
+              child: Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
             ),
+          ),
+          Row(
+            mainAxisAlignment: .center,
+            children:
+                [
+                      ElevatedButton.icon(
+                        onPressed: _incrementCounter,
+                        label: Icon(Icons.exposure_plus_1),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: _incrementCounterByTwo,
+                        label: Icon(Icons.exposure_plus_2),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: _decrementCounter,
+                        label: Icon(Icons.exposure_minus_1),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: _decrementCounterByTwo,
+                        label: Icon(Icons.exposure_minus_2),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: _squareCounter,
+                        label: Icon(Icons.superscript),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: _randomizeCounter,
+                        label: Icon(Icons.question_mark),
+                      ),
+                    ]
+                    .map(
+                      (widget) => Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: widget,
+                      ),
+                    )
+                    .toList(),
           ),
         ],
       ),
